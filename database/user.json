@@ -1,0 +1,19 @@
+{
+    "name": "Joseph",
+    "profession": "Software Engineer",
+    "age": 20,
+    "residence": "South Korea",
+    "address": "South Korea, Busan",
+    "languages": ["Uzbek", "Korean", "English"],
+    "skills": ["HTML", "CSS", "JS", "NodeJS", "Python"],
+    "extra_skills": ["Bootstrap, Materialize", "Styling, Sass", "Django, Flask", "GIT Knowledge"],
+    "service_desc": "lorem",
+    "about_me": "lorem",
+    "city": "Busan",
+    "title": ["Flower", "Seedlings", "Gardner", "Old", "New"],
+    "flower_desc": ["What is Flower?", "What is a Seedling?", "Who is Gardner"],
+    "flower_name": ["Tulip", "Daffodil", "Poppy", "Sunflower", "Bluebell", "Rose", "Snowdrop", "Cherry", "Blossom"],
+    "flower_price": ["$15", "$25", "$12", "$20", "$35", "$30", "$22", "$19", "$9"],
+    "famous_words": ["World is Beautiful with Flowers"],
+    "famous_name": ["Steve Jobs"]
+}
