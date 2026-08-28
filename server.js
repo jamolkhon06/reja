@@ -35,11 +35,11 @@ app.get("/author", (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('harid')
+    res.render('reja')
 });
 
 const server = http.createServer(app);
 let PORT = 3000;
 server.listen(PORT, () => {
-    console.log(`The server is running successfully on port: ${PORT}`);
+    console.log(`The server is running successfully on port: ${PORT}, http://localhost:${PORT}`);
 })
