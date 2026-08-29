@@ -1,45 +1,19 @@
-const express = require('express');
-const app = express();
 const http = require('http');
-const fs = require("fs");
+const mongodb = require("mongodb");
 
-let user;
-fs.readFile("database/user.json", "utf8", (err, data) => {
-    if(err) {
-        console.error(`ERROR: ${err}`);
-    } else {
-        user = JSON.parse(data);
+let db;
+const connectionString = "mongodb+srv://jamolxonsiddikovich_db_user:ShzkXzDf8EQ5L8Gb@cluster0.uttsopb.mongodb.net/";
+mongodb.connect(connectionString, {useNewUrlParse: true, useUnifiedTopology: true}, (err, client) => {
+    if(err) console.error("ERROR on connection MongoDB", err);
+    else {
+        console.log("MongoDB connection successful");
+        module.exports = client;
+        
+        const app = require('./app');
+        const server = http.createServer(app);
+        let PORT = 3000;
+        server.listen(PORT, () => {
+            console.log(`The server is running successfully on port: ${PORT}, http://localhost:${PORT}`);
+        })
     }
-})
-
-// 1: Kirish code
-app.use(express.static("public"));
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-// 2: Session code
-
-// 3: Views code
-app.set('views', 'views');
-app.set('view engine', 'ejs');
-// BSSR => Backend server side rendering
-
-// 4: Routing code
-app.post("/create-item", (req, res) => {
-    console.log(req.body);
-    res.json({ test: "success" })
-})
-
-app.get("/author", (req, res) => {
-    res.render("author", {user: user});
-})
-
-app.get('/', (req, res) => {
-    res.render('reja')
-});
-
-const server = http.createServer(app);
-let PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`The server is running successfully on port: ${PORT}, http://localhost:${PORT}`);
 })
