@@ -26,4 +26,25 @@ document.getElementById("create-form").addEventListener("submit", (e) => {
          .catch(err => {
             console.error("Iltimos qaytadan harakat qiling")
          })
+});
+
+document.addEventListener("click", (e) => {
+    // DELETE operations
+    if(e.target.classList.contains("delete-me")) {
+        if(confirm("Aniq o'chirmoqchimisiz?")) {
+            axios
+                 .post("/delete-item", {id: e.target.getAttribute("data-id")})
+                 .then(response => {
+                    e.target.parentElement.parentElement.remove();
+                 })
+                 .catch(err => {
+                    console.error("Iltimos qaytadan harakat qiling");
+                 })
+        }
+    }
+
+    // EDIT operations
+    if(e.target.classList.contains("edit-me")) {
+        alert("Siz edit tugmasini bosdingiz!")
+    }
 })
