@@ -43,7 +43,8 @@ class Shop {
 }
 
 const shop = new Shop(4, 5, 2);
-shop.qoldiq()
+shop.qoldiq();
+shop.qabul("sausage", 7);
 
 // B-Task
 // Shunday function tuzing, u 1ta string parametrga ega bolsin, hamda osha stringda qatnashgan raqamlarni sonini bizga return qilsin. MASALAN countDigits("ad2a54y79wet0sfgb9") 7ni return qiladi.
