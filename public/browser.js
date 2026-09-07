@@ -66,3 +66,9 @@ document.getElementById("clean-all").addEventListener("click", () => {
             document.location.reload()
          })
 });
+
+// STEP 1: Frontend
+// STEP 2: Frontend'dan Backend'ga request
+// STEP 3: Backend'dan Database'ga request
+// STEP 4: Datebase'dan Backend'ga response
+// STEP 5: Backend'dan Frontend'ga response
