@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();
+const app = express(); // express function qaytargani uchun app nomli object yasab olamiz
 const fs = require("fs");
 
 // Calling MongoDB
@@ -18,9 +18,9 @@ fs.readFile("database/user.json", "utf8", (err, data) => {
 })
 
 // 1: Kirish code
-app.use(express.static("public")); // Frontend public folder'ni hammaga visible qilib qo'yadi
-app.use(express.json()); // ExpressJS bizga JSON format'da ma'lumot qaytaradi
-app.use(express.urlencoded({extended: true})); // Form'da Backend'ga ma'lumot yuborishini osonlashtiradi
+app.use(express.static("public")); // Middleware DP: public folder'ni tashqi olamga ochadi
+app.use(express.json()); // Middleware DP: REST API uchun xizmat qiladi
+app.use(express.urlencoded({extended: true})); // Middleware DP: TRADITIONAL API uchun xizmat qiladi
 
 // 2: Session code
 
@@ -42,7 +42,7 @@ app.post("/delete-item", (req, res) => {
     const id = req.body.id; // Database'dan har bir ma'lumot uchun kelayotgan id qaytaryapti
     db.collection("plans").deleteOne({_id: new mongodb.ObjectId(id)}, (err, data) => {
         res.json({state: "success"});
-        // Agar hamma narsa to'g'ri bo'lsa, API'ga tepadagi json ko'rinishida state qaytaradi
+        // Agar hamma narsa to'g'ri ishlasa, API'ga tepadagi json ko'rinishida state qaytaradi
     })
     // Agar bir o'chirmoqchi bo'lgan ma'lumotning id'si plans nomli collection ichidagi ma'lumot id'siga to'g'ri bo'lsa, Backend'ga POST method yuborilib, o'sha ma'lumot o'chiriladi
 });
@@ -59,24 +59,29 @@ app.post("/edit-item", (req, res) => {
 });
 
 app.post("/delete-all", (req, res) => {
+    // Bu yerda "Hamma rejalarni o'chirish" tugmasini bosadigan bo'lsak, Backend'ga POST method'li so'rov yuboradi
     if(req.body.delete_all) {
         db.collection("plans").deleteMany(() => {
-            res.json({state: "hamma rejalar o'chirildi"})
+            res.json({state: "hamma rejalar o'chirildi"});
+            // Agar hamma narsa to'g'ri ishlasa, database'dagi hamma ma'lumotni o'chirib yuboradi
         })
     }
 })
 
 app.get("/author", (req, res) => {
+    // Birinchi bo'lib, localhost://3000/author ga kiradigan bo'lsak, Backend'ga GET method'li so'rov yuboradi va views papkasini ichidagi author.ejs faylini render qiladi
     res.render("author", {user: user});
 })
 
 app.get('/', (req, res) => {
+    // Agar foydalanuvchi localhost://3000'ga kiradigan bo'lsa, u holda Backend server'ga GET method'li so'rov yuboradi
     console.log('User entered /')
     db.collection("plans").find().toArray((err, data) => {
         if(err) {
             console.error(err);
             res.end("Something went wrong")
         } else {
+            // Agar hamma narsa joyida ishlasa, view papkasini ichidagi reja.ejs faylini render qiladi va user.json faylini items nomli object ko'rinishida meros qilib oladi
             res.render('reja', {items: data});
         }
     })
